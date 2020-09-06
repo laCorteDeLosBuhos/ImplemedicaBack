@@ -117,4 +117,12 @@ public class AuthController {
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
+	
+	@PostMapping("/createroles")
+	public ResponseEntity<?> createRoles(@Valid @RequestBody Role role){
+		
+		roleRepository.save(role);
+		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+		
+	}
 }
