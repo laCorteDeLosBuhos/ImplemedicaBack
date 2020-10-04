@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -17,6 +18,7 @@ import org.hibernate.annotations.ManyToAny;
 @Table(name = "Pedidos")
 public class Pedidos {
 	@Id
+	@GeneratedValue
 	private int id; 
 	private String nombre;
 	private Date fecha;
@@ -30,7 +32,7 @@ public class Pedidos {
 	private Ciudad ciudad;
 	private String observaciones;
 	private String estado;
-	@OneToMany
+	@ManyToMany
 	@JoinColumn(name = "id_detalle")
 	private List<DetallePedido> productos;
 	

@@ -1,6 +1,7 @@
 package com.bezkoder.springjwt.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 @Table(name = "DetallePedidos")
 public class DetallePedido {
 	@Id
+	@GeneratedValue
 	private int id;
 	private int cantidad;
 	@OneToOne
