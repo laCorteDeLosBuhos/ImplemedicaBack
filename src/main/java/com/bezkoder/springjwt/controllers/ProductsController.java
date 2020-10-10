@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,10 +11,6 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 import javax.validation.Valid;
-
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,6 +35,11 @@ public class ProductsController {
 	@GetMapping("/getAll")
 	public ResponseEntity<?> GetAllProducts(){
 		return ResponseEntity.ok(products.findAll());
+	}
+	@GetMapping("/deleteAll")
+	public ResponseEntity<?> DeleteProducts(){
+		products.deleteAll();
+		return ResponseEntity.ok("Ok");
 	}
 	@PostMapping("/setProducts")
 	public ResponseEntity<?> SetProducts(@Valid @RequestBody SetProductRequest product){
@@ -71,11 +71,13 @@ public class ProductsController {
 				System.out.println(datos[0]);
 				System.out.println(datos[1]);
 				Products datosarchivos = new Products();				
-				datosarchivos.setNombre(datos[0].toUpperCase());
-				datosarchivos.setCodigo(datos[1]);
-				datosarchivos.setMarca(datos[2]);
-				datosarchivos.setDescripcion(datos[3]);
-				datosarchivos.setUrlImg(datos[4]);
+				datosarchivos.setNombre(datos[1].toUpperCase());
+				datosarchivos.setCodigo(datos[2]);
+				datosarchivos.setMarca(datos[5]);
+				datosarchivos.setDescripcion(datos[4]);
+				datosarchivos.setUrlImg(datos[0]);
+				datosarchivos.setLinea(datos[3]);
+				datosarchivos.setPresentacion(datos[6]);
 				products.save(datosarchivos);
 			}
 			contador++;

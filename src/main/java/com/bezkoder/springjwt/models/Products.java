@@ -13,6 +13,14 @@ public class Products {
 	private String marca;
 	private String descripcion;
 	private String urlImg;
+	private String linea;
+	private String presentacion;
+	public String getLinea() {
+		return linea;
+	}
+	public void setLinea(String linea) {
+		this.linea = linea;
+	}
 	public Products() {
 	}
 	public Products(String nombre, String Codigo, String Marca, String Descripcion, String UrlImg) {
@@ -51,6 +59,12 @@ public class Products {
 	}
 	public void setUrlImg(String urlImg) {
 		this.urlImg = urlImg;
+	}
+	public String getPresentacion() {
+		return presentacion;
+	}
+	public void setPresentacion(String presentacion) {
+		this.presentacion = presentacion;
 	}
 	
 }
