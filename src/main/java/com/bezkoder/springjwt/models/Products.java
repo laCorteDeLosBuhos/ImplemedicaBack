@@ -14,13 +14,13 @@ public class Products {
 	@Id
 	private String codigo;
 	private String marca;
-	@Length(max=2000)
+	@Column(name = "descripcion", length = 1024)
 	private String descripcion;
-	@Length(max=2000)
+	@Column(name = "urlImg", length = 1024)
 	private String urlImg;
-	@Length(max=2000)
+	@Column(name = "linea", length = 1024)
 	private String linea;
-	@Length(max=2000)
+	@Column(name = "presentacion", length = 1024)
 	private String presentacion;
 	public String getLinea() {
 		return linea;
