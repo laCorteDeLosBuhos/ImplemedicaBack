@@ -69,11 +69,11 @@ public class ProductsController {
 				Products datosarchivos = new Products();				
 				datosarchivos.setNombre(datos[1].toUpperCase());
 				datosarchivos.setCodigo(datos[2]);
-				datosarchivos.setMarca(datos[5]);
+				datosarchivos.setMarca(datos[6]);
 				datosarchivos.setDescripcion(datos[4]);
 				datosarchivos.setUrlImg(datos[0]);
 				datosarchivos.setLinea(datos[3]);
-				datosarchivos.setPresentacion(datos[6]);
+				datosarchivos.setPresentacion(datos[5]);
 				products.save(datosarchivos);
 			}
 			contador++;
