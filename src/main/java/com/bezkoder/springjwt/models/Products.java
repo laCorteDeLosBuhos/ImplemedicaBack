@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
 @Table(name = "Productos")
 public class Products {
@@ -11,6 +13,7 @@ public class Products {
 	@Id
 	private String codigo;
 	private String marca;
+	@Length(max=2000)
 	private String descripcion;
 	private String urlImg;
 	private String linea;
