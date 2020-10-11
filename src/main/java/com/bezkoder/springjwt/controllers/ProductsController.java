@@ -1,14 +1,17 @@
 package com.bezkoder.springjwt.controllers;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.List;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,13 +51,9 @@ public class ProductsController {
 			byte[] decodedImg = Base64.getDecoder().decode(product.getBase64().getBytes(StandardCharsets.UTF_8));
 			Path destinationFile = Paths.get("fileTmp/", product.getNombre());
 			Files.write(destinationFile, decodedImg);
-
-			BufferedReader br = null;
-
-			// Se define separador ","
-
-			br = new BufferedReader(new FileReader("fileTmp/" + product.getNombre()));
-			saveProducts(br);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("fileTmp/"+ product.getNombre()),StandardCharsets.ISO_8859_1 ));
+						
+			saveProducts(reader);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,10 +65,7 @@ public class ProductsController {
 		int contador = 1;
 		while ((line = br.readLine()) != null) {
 			if (contador != 1) {
-				System.out.println("SOLO FILAS " + line);
 				String[] datos = line.split(";");
-				System.out.println(datos[0]);
-				System.out.println(datos[1]);
 				Products datosarchivos = new Products();				
 				datosarchivos.setNombre(datos[1].toUpperCase());
 				datosarchivos.setCodigo(datos[2]);
