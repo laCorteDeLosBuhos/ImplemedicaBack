@@ -66,7 +66,8 @@ public class ProductsController {
 		while ((line = br.readLine()) != null) {
 			if (contador != 1) {
 				String[] datos = line.split(";");
-				Products datosarchivos = new Products();				
+				Products datosarchivos = new Products();	
+				System.out.println(line);
 				datosarchivos.setNombre(datos[1].toUpperCase());
 				datosarchivos.setCodigo(datos[2]);
 				datosarchivos.setMarca(datos[6]);
