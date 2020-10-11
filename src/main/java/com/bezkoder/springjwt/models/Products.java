@@ -9,18 +9,18 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @Table(name = "Productos")
 public class Products {
-	@Length(max=2000)
+	@Size(max = 4000)
 	private String nombre;
 	@Id
 	private String codigo;
 	private String marca;
-	@Column(name = "descripcion", length = 1024)
+	@Size(max = 4000)
 	private String descripcion;
-	@Column(name = "urlImg", length = 1024)
+	@Size(max = 4000)
 	private String urlImg;
-	@Column(name = "linea", length = 1024)
+	@Size(max = 4000)
 	private String linea;
-	@Column(name = "presentacion", length = 1024)
+	@Size(max = 4000)
 	private String presentacion;
 	public String getLinea() {
 		return linea;
