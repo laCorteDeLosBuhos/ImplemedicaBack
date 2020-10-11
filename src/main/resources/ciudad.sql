@@ -1,2 +1,1 @@
-INSERT INTO ciudades (id, descripcion) VALUES
-(1, 'Bogota');
+ALTER TABLE productos ALTER COLUMN descripcion TYPE text;

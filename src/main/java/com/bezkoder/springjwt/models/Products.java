@@ -4,23 +4,16 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Length;
-
 @Entity
 @Table(name = "Productos")
 public class Products {
-	@Size(max = 4000)
 	private String nombre;
 	@Id
 	private String codigo;
 	private String marca;
-	@Size(max = 4000)
 	private String descripcion;
-	@Size(max = 4000)
 	private String urlImg;
-	@Size(max = 4000)
 	private String linea;
-	@Size(max = 4000)
 	private String presentacion;
 	public String getLinea() {
 		return linea;
