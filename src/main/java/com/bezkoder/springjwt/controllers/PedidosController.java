@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,11 +62,11 @@ public class PedidosController {
 			}
 			ped.setProductos(products);
 			pedidosRepository.save(ped);
-			return ResponseEntity.ok("Ok");
+			return ResponseEntity.ok(HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return ResponseEntity.ok("Fail");
+			return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
 		}
 	}
 	@GetMapping("/getAll")
