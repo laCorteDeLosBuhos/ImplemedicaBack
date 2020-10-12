@@ -91,7 +91,7 @@ public class PedidosController {
 			Ciudad cd = this.ciudadRepository.getOne(product.getCiudad().getId()); 
 			ped.setCiudad(cd);
 			ped.setObservaciones(product.getObservaciones());
-			ped.setEstado("Pendiente");
+			ped.setEstado(product.getEstado());
 			List<DetallePedido> productos= product.getProductos();
 			List<DetallePedido> products = new ArrayList<DetallePedido>();
 			for (DetallePedido detalle:productos) {

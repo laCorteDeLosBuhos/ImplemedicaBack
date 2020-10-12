@@ -30,6 +30,8 @@ public class SavePedidoRequest {
 	@NotNull
 	private String observaciones;
 	@NotNull
+	private String estado;
+	@NotNull
 	private List<DetallePedido> productos;
 	public int getId() {
 		return id;
@@ -96,5 +98,11 @@ public class SavePedidoRequest {
 	}
 	public void setProductos(List<DetallePedido> productos) {
 		this.productos = productos;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 }
