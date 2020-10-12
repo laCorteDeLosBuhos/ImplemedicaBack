@@ -113,7 +113,7 @@ public class PedidosController {
 						Inventario datosarchivos = new Inventario();
 						datosarchivos.setProduct_id(Integer.parseInt(detalle.getProducto().getCodigo()));
 						datosarchivos.setProducto(productosrepository.getOne(detalle.getProducto().getCodigo()));
-						datosarchivos.setCantidad(-1);;
+						datosarchivos.setCantidad(-detalle.getCantidad());
 						inventario.save(datosarchivos);	
 					}
 				}
