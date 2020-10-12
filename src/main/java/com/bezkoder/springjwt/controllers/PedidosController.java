@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bezkoder.springjwt.models.Ciudad;
 import com.bezkoder.springjwt.models.DetallePedido;
 import com.bezkoder.springjwt.models.Pedidos;
+import com.bezkoder.springjwt.models.Products;
 import com.bezkoder.springjwt.payload.request.PedidosRequest;
+import com.bezkoder.springjwt.payload.request.SavePedidoRequest;
 import com.bezkoder.springjwt.repository.CiudadRepository;
 import com.bezkoder.springjwt.repository.DetallePedidoRepository;
 import com.bezkoder.springjwt.repository.PedidosRepository;
@@ -72,5 +74,38 @@ public class PedidosController {
 	@GetMapping("/getAll")
 	public ResponseEntity<?> GetAllProducts(){
 		return ResponseEntity.ok(pedidosRepository.findAll());
+	}
+	@PostMapping("/savePedido")
+	public ResponseEntity<?> savePedido(@Valid @RequestBody SavePedidoRequest product){
+		try {
+			Pedidos ped= new Pedidos();
+			ped.setId(product.getId());
+			ped.setNombre(product.getNombre());
+			ped.setFecha(product.getFecha());
+			ped.setNombre(product.getNombre());
+			ped.setTipoDoc(product.getTipoDoc());
+			ped.setNumDoc(product.getNumDoc());
+			ped.setCorreo(product.getCorreo());
+			ped.setDireccion(product.getDireccion());
+			ped.setTelefono(product.getTelefono());
+			Ciudad cd = this.ciudadRepository.getOne(product.getCiudad().getId()); 
+			ped.setCiudad(cd);
+			ped.setObservaciones(product.getObservaciones());
+			ped.setEstado("Pendiente");
+			List<DetallePedido> productos= product.getProductos();
+			List<DetallePedido> products = new ArrayList<DetallePedido>();
+			for (DetallePedido detalle:productos) {
+				detallepedidosRepository.save(detalle);
+				System.out.println(detalle.getId());
+				products.add(detalle);
+			}
+			ped.setProductos(products);
+			pedidosRepository.save(ped);
+			return ResponseEntity.ok(HttpStatus.OK);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
+		}
 	}
 }
