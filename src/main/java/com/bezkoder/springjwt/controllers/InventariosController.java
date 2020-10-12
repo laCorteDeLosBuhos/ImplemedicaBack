@@ -68,7 +68,7 @@ public class InventariosController {
 		while ((line = br.readLine()) != null) {
 			if (contador != 1) {
 				String[] datos = line.split(";");
-				if(inventario.getOne(Integer.parseInt(datos[0])).getProducto()!=null) {
+				if(inventario.existsById(Integer.parseInt(datos[0]))) {
 					Inventario datosarchivos = inventario.getOne(Integer.parseInt(datos[0]));
 					datosarchivos.setCantidad(Integer.parseInt(datos[1])+datosarchivos.getCantidad());
 					inventario.save(datosarchivos);
