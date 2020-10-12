@@ -17,13 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bezkoder.springjwt.models.Ciudad;
 import com.bezkoder.springjwt.models.DetallePedido;
+import com.bezkoder.springjwt.models.Inventario;
 import com.bezkoder.springjwt.models.Pedidos;
 import com.bezkoder.springjwt.models.Products;
 import com.bezkoder.springjwt.payload.request.PedidosRequest;
 import com.bezkoder.springjwt.payload.request.SavePedidoRequest;
 import com.bezkoder.springjwt.repository.CiudadRepository;
 import com.bezkoder.springjwt.repository.DetallePedidoRepository;
+import com.bezkoder.springjwt.repository.InventarioRepository;
 import com.bezkoder.springjwt.repository.PedidosRepository;
+import com.bezkoder.springjwt.repository.ProductRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -35,6 +38,11 @@ public class PedidosController {
 	private DetallePedidoRepository detallepedidosRepository;
 	@Autowired
 	private CiudadRepository ciudadRepository;
+	@Autowired
+	private InventarioRepository inventario;
+	@Autowired
+	private ProductRepository productosrepository;
+	
 	@SuppressWarnings("null")
 	@PostMapping("/newPedido")
 	public ResponseEntity<?> newPedido(@Valid @RequestBody PedidosRequest product){
@@ -96,7 +104,19 @@ public class PedidosController {
 			List<DetallePedido> products = new ArrayList<DetallePedido>();
 			for (DetallePedido detalle:productos) {
 				detallepedidosRepository.save(detalle);
-				System.out.println(detalle.getId());
+				if(product.getEstado().equals("Entregado")) {
+					if(inventario.existsById(Integer.parseInt(detalle.getProducto().getCodigo()))) {
+						Inventario datosarchivos = inventario.getOne(Integer.parseInt(detalle.getProducto().getCodigo()));
+						datosarchivos.setCantidad(datosarchivos.getCantidad()-detalle.getCantidad());
+						inventario.save(datosarchivos);
+					}else {
+						Inventario datosarchivos = new Inventario();
+						datosarchivos.setProduct_id(Integer.parseInt(detalle.getProducto().getCodigo()));
+						datosarchivos.setProducto(productosrepository.getOne(detalle.getProducto().getCodigo()));
+						datosarchivos.setCantidad(-1);;
+						inventario.save(datosarchivos);	
+					}
+				}
 				products.add(detalle);
 			}
 			ped.setProductos(products);
