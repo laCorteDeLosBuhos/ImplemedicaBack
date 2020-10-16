@@ -48,12 +48,16 @@ public class ProductsController {
 	public ResponseEntity<?> SetProducts(@Valid @RequestBody SetProductRequest product){
 		try {
 			System.out.println(product.getNombre());
-			byte[] decodedImg = Base64.getDecoder().decode(product.getBase64().getBytes(StandardCharsets.UTF_8));
+			byte[] decodedImg = Base64.getDecoder().decode(product.getBase64().getBytes(StandardCharsets.ISO_8859_1));
 			Path destinationFile = Paths.get("fileTmp/", product.getNombre());
 			Files.write(destinationFile, decodedImg);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("fileTmp/"+ product.getNombre()),StandardCharsets.ISO_8859_1 ));
-						
-			saveProducts(reader);
+
+			BufferedReader br = null;
+
+			// Se define separador ","
+
+			br = new BufferedReader(new InputStreamReader(new FileInputStream("fileTmp/"+ product.getNombre()),StandardCharsets.ISO_8859_1 ));
+			saveProducts(br);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
