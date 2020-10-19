@@ -18,12 +18,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bezkoder.springjwt.models.Products;
+import com.bezkoder.springjwt.payload.request.SaveProduct;
 import com.bezkoder.springjwt.payload.request.SetProductRequest;
 import com.bezkoder.springjwt.repository.ProductRepository;
 
@@ -38,6 +40,38 @@ public class ProductsController {
 	@GetMapping("/getAll")
 	public ResponseEntity<?> GetAllProducts(){
 		return ResponseEntity.ok(products.findAll());
+	}
+	@GetMapping("/eliminar/{ano}")
+	public ResponseEntity<?> Eliminar(@PathVariable String ano){
+		Object response;
+		try {
+			products.delete(products.getOne(ano));
+			response="Eliminado Exitosamente";
+			return ResponseEntity.ok(response);	
+		} catch (Exception e) {
+			response="Hay pedidos con este producto por lo cual no se puede eliminar";
+			return ResponseEntity.ok(response);
+		}
+	}
+	@PostMapping("/editar")
+	public ResponseEntity<?> Editar(@Valid @RequestBody SaveProduct sve){
+		Object response;
+		try {
+			Products product=new Products();
+			product.setCodigo(sve.getCodigo());
+			product.setDescripcion(sve.getDescripcion());
+			product.setLinea(sve.getLinea());
+			product.setMarca(sve.getMarca());
+			product.setNombre(sve.getNombre());
+			product.setPresentacion(sve.getPresentacion());
+			product.setUrlImg(sve.getUrlImg());
+			products.save(product);
+			response="Editado Exitosamente";
+			return ResponseEntity.ok(response);	
+		} catch (Exception e) {
+			response="Ha ocurrido un error";
+			return ResponseEntity.ok(response);
+		}
 	}
 	@GetMapping("/deleteAll")
 	public ResponseEntity<?> DeleteProducts(){
