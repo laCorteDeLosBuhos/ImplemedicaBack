@@ -2,6 +2,8 @@ package com.bezkoder.springjwt.payload.response;
 
 import java.util.List;
 
+import com.bezkoder.springjwt.models.User;
+
 public class JwtResponse {
 	private String token;
 	private String type = "Bearer";
@@ -9,13 +11,16 @@ public class JwtResponse {
 	private String username;
 	private String email;
 	private List<String> roles;
+	private User usuario;
+	
 
-	public JwtResponse(String accessToken, Long id, String username, String email, List<String> roles) {
+	public JwtResponse(String accessToken, Long id, String username, String email, List<String> roles,User user) {
 		this.token = accessToken;
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.roles = roles;
+		this.usuario = user;
 	}
 
 	public String getAccessToken() {
@@ -60,5 +65,32 @@ public class JwtResponse {
 
 	public List<String> getRoles() {
 		return roles;
+	}
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public User getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(User usuario) {
+		this.usuario = usuario;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 }

@@ -1,8 +1,6 @@
 package com.bezkoder.springjwt.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Productos")
@@ -15,6 +13,10 @@ public class Products {
 	private String urlImg;
 	private String linea;
 	private String presentacion;
+	@Column(columnDefinition = "boolean default false")
+	private boolean destacado;
+	@Column(columnDefinition = "boolean default false")
+	private boolean promocion;
 	public String getLinea() {
 		return linea;
 	}
@@ -65,6 +67,18 @@ public class Products {
 	}
 	public void setPresentacion(String presentacion) {
 		this.presentacion = presentacion;
+	}
+	public boolean isDestacado() {
+		return destacado;
+	}
+	public void setDestacado(boolean destacado) {
+		this.destacado = destacado;
+	}
+	public boolean isPromocion() {
+		return promocion;
+	}
+	public void setPromocion(boolean promocion) {
+		this.promocion = promocion;
 	}
 	
 }

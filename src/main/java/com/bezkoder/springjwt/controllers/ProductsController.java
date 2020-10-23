@@ -2,7 +2,6 @@ package com.bezkoder.springjwt.controllers;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
-import java.util.List;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +63,8 @@ public class ProductsController {
 			product.setNombre(sve.getNombre());
 			product.setPresentacion(sve.getPresentacion());
 			product.setUrlImg(sve.getUrlImg());
+			product.setDestacado(sve.isDestacado());
+			product.setPromocion(sve.isPromocion());
 			products.save(product);
 			response="Editado Exitosamente";
 			return ResponseEntity.ok(response);	

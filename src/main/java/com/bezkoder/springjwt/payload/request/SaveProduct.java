@@ -17,6 +17,10 @@ public class SaveProduct {
 	private String linea;
 	@NotBlank
 	private String presentacion;
+	@NotBlank
+	private boolean destacado;
+	@NotBlank
+	private boolean promocion;
 	public String getNombre() {
 		return nombre;
 	}
@@ -58,6 +62,18 @@ public class SaveProduct {
 	}
 	public void setPresentacion(String presentacion) {
 		this.presentacion = presentacion;
+	}
+	public boolean isDestacado() {
+		return destacado;
+	}
+	public void setDestacado(boolean destacado) {
+		this.destacado = destacado;
+	}
+	public boolean isPromocion() {
+		return promocion;
+	}
+	public void setPromocion(boolean promocion) {
+		this.promocion = promocion;
 	}
 	
 }
