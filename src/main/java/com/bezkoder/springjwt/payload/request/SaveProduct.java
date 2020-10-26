@@ -17,9 +17,7 @@ public class SaveProduct {
 	private String linea;
 	@NotBlank
 	private String presentacion;
-	@NotBlank
 	private boolean destacado;
-	@NotBlank
 	private boolean promocion;
 	public String getNombre() {
 		return nombre;
