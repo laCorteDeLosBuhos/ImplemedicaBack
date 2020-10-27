@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.bezkoder.springjwt.models.Pedidos;
 
 @Repository
-public interface PedidosRepository extends JpaRepository<Pedidos,Long>{
+public interface PedidosRepository extends JpaRepository<Pedidos,Integer>{
 	@Query("SELECT p FROM Pedidos p WHERE p.correo=?1")
 	List<Pedidos> findby(String a);
 }

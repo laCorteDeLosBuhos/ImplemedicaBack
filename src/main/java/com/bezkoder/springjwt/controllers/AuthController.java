@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import com.bezkoder.springjwt.models.ERole;
 import com.bezkoder.springjwt.models.Role;
 import com.bezkoder.springjwt.models.User;
 import com.bezkoder.springjwt.payload.request.LoginRequest;
+import com.bezkoder.springjwt.payload.request.SetAdminRequest;
 import com.bezkoder.springjwt.payload.request.SignupRequest;
 import com.bezkoder.springjwt.payload.response.JwtResponse;
 import com.bezkoder.springjwt.payload.response.MessageResponse;
@@ -118,7 +120,32 @@ public class AuthController {
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
-	
+	@GetMapping("/getUsers")
+	public ResponseEntity<?> getUsers(){
+		
+		return ResponseEntity.ok(userRepository.findAll());
+		
+	}
+	@PostMapping("/setAdmin")
+	public ResponseEntity<?> setAdmin(@Valid @RequestBody SetAdminRequest signUpRequest){
+		User us=userRepository.getOne(Long.parseLong(String.valueOf(signUpRequest.getId())));
+		Set<Role> roles = new HashSet<>();
+		Set<String> strRoles =signUpRequest.getRole();
+		strRoles.forEach(role -> {
+			switch (role) {
+			case "admin":
+				Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+						.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+				roles.add(adminRole);
+
+				break;
+			}
+		});
+		us.setRoles(roles);
+		userRepository.save(us);
+		return ResponseEntity.ok(new MessageResponse("User changed successfully!"));
+		
+	}
 	@PostMapping("/createroles")
 	public ResponseEntity<?> createRoles(@Valid @RequestBody Role role){
 		

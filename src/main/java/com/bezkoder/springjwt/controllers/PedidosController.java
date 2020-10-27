@@ -88,6 +88,17 @@ public class PedidosController {
 	public ResponseEntity<?> GetAllPedidos(@PathVariable String celular){
 		return ResponseEntity.ok(pedidosRepository.findby(celular));
 	}
+	@GetMapping("/delete/{celular}")
+	public ResponseEntity<?> Delete(@PathVariable int celular){
+		
+		Pedidos pd=pedidosRepository.getOne(celular);
+		List<DetallePedido> productos=pd.getProductos();
+		for (DetallePedido detalle:productos) {
+			detallepedidosRepository.deleteById(detalle.getId());
+		}
+		pedidosRepository.deleteById(celular);
+		return ResponseEntity.ok("Eliminado");
+	}
 	@PostMapping("/savePedido")
 	public ResponseEntity<?> savePedido(@Valid @RequestBody SavePedidoRequest product){
 		try {
