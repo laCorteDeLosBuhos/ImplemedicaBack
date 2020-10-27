@@ -36,7 +36,7 @@ public class ContactoController {
 		MimeMessageHelper helper = new MimeMessageHelper(msg, true);
 		helper.setTo("desarrollo2@lacortedelosbuhos.com");
 		helper.setFrom(Remitente);
-		ClassPathResource path2=new ClassPathResource("index.html");
+		ClassPathResource path2=new ClassPathResource("\\index.html");
 		byte[] encoded = Files.readAllBytes(path2.getFile().toPath());
 		String body = new String(encoded, StandardCharsets.UTF_8);
 		System.out.println(request.getCorreo());
