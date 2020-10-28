@@ -28,6 +28,8 @@ public class PedidosRequest {
 	@NotNull
 	private String observaciones;
 	@NotNull
+	private String dedica;
+	@NotNull
 	private List<DetallePedido> productos;
 	public String getNombre() {
 		return nombre;
@@ -82,6 +84,12 @@ public class PedidosRequest {
 	}
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
+	}
+	public String getDedica() {
+		return dedica;
+	}
+	public void setDedica(String dedica) {
+		this.dedica = dedica;
 	}
 	public List<DetallePedido> getProductos() {
 		return productos;

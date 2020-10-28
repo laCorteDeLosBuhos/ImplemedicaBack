@@ -31,6 +31,7 @@ public class Pedidos {
     @JoinColumn(name = "id_ciudad")
 	private Ciudad ciudad;
 	private String observaciones;
+	private String dedica;
 	private String estado;
 	@ManyToMany
 	@JoinColumn(name = "id_detalle")
@@ -112,6 +113,12 @@ public class Pedidos {
 		this.observaciones = observaciones;
 	}
 	
+	public String getDedica() {
+		return dedica;
+	}
+	public void setDedica(String dedica) {
+		this.dedica = dedica;
+	}
 	public String getEstado() {
 		return estado;
 	}
