@@ -39,7 +39,7 @@ public class ContactoController {
 		helper.setTo("desarrollo2@lacortedelosbuhos.com");
 		helper.setFrom(Remitente);
 		Path path=Paths.get("/app/src/index.html");
-		File directoryPath = new File("/app/src");
+		File directoryPath = new File("/app/src/main/resources");
 	      //List of all files and directories
 	      String contents[] = directoryPath.list();
 	      System.out.println("List of files and directories in the specified directory:");
