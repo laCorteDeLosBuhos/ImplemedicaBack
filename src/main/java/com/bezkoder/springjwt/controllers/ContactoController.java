@@ -39,14 +39,6 @@ public class ContactoController {
 		helper.setTo("desarrollo2@lacortedelosbuhos.com");
 		helper.setFrom(Remitente);
 		Path path=Paths.get("/app/src/main/resources/index.html");
-		File directoryPath = new File("/app/src/main/resources");
-	      //List of all files and directories
-	      String contents[] = directoryPath.list();
-	      System.out.println("List of files and directories in the specified directory:");
-	      for(int i=0; i<contents.length; i++) {
-	         System.out.println(contents[i]);
-	      }
-		System.out.println(path);
 		byte[] encoded = Files.readAllBytes(path);
 		String body = new String(encoded, StandardCharsets.UTF_8);
 		System.out.println(request.getCorreo());
@@ -56,7 +48,7 @@ public class ContactoController {
 		body=body.replace("{telefono}", request.getTelefono());
 		body=body.replace("{comentario}", request.getComentario());
 		helper.setText(body,true);
-		helper.setSubject("Haz recibido una solicitud de contacto ");
+		helper.setSubject("Haz recibido una solicitud de contacto.");
 		javaMailSender.send(msg);
 		}catch (Exception e) {
 			// TODO: handle exception
