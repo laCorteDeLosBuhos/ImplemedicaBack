@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.controllers;
 
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,6 +39,13 @@ public class ContactoController {
 		helper.setTo("desarrollo2@lacortedelosbuhos.com");
 		helper.setFrom(Remitente);
 		Path path=Paths.get("index.html");
+		File directoryPath = new File("/");
+	      //List of all files and directories
+	      String contents[] = directoryPath.list();
+	      System.out.println("List of files and directories in the specified directory:");
+	      for(int i=0; i<contents.length; i++) {
+	         System.out.println(contents[i]);
+	      }
 		System.out.println(path);
 		byte[] encoded = Files.readAllBytes(path);
 		String body = new String(encoded, StandardCharsets.UTF_8);
