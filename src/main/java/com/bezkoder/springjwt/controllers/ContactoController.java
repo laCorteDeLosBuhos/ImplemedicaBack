@@ -2,6 +2,8 @@ package com.bezkoder.springjwt.controllers;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.mail.internet.MimeMessage;
 import javax.validation.Valid;
@@ -36,7 +38,8 @@ public class ContactoController {
 		helper.setTo("desarrollo2@lacortedelosbuhos.com");
 		helper.setFrom(Remitente);
 		FileUrlResource path2=new FileUrlResource("index.html");
-		byte[] encoded = Files.readAllBytes(path2.getFile().toPath());
+		Path path=Paths.get("index.html");
+		byte[] encoded = Files.readAllBytes(path.toAbsolutePath());
 		String body = new String(encoded, StandardCharsets.UTF_8);
 		System.out.println(request.getCorreo());
 		body=body.replace("{nombre}", request.getNombre());
