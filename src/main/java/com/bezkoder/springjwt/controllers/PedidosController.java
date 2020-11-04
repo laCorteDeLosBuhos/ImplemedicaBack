@@ -105,10 +105,8 @@ public class PedidosController {
 		
 		List<Pedidos> pd=pedidosRepository.findAll();
 		for (Pedidos pedidos:pd) {
-			List<DetallePedido> productos=pedidos.getProductos();
-			for (DetallePedido detalle:productos) {
-				detallepedidosRepository.deleteById(detalle.getId());
-			}
+			pedidos.setProductos(new ArrayList<DetallePedido>());
+			pedidosRepository.save(pedidos);
 			pedidosRepository.deleteById(pedidos.getId());
 		}
 		return ResponseEntity.ok("Eliminado");

@@ -123,8 +123,7 @@ public class AuthController {
 	@PostMapping("/edit")
 	public ResponseEntity<?> editUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		// Create new user's account
-		User user = new User();
-		user.setId(signUpRequest.getId());
+		User user = userRepository.getOne(signUpRequest.getId());
 		user.setUsername(signUpRequest.getUsername());
 		user.setEmail(signUpRequest.getEmail());
 		user.setPassword(encoder.encode(signUpRequest.getPassword()));
