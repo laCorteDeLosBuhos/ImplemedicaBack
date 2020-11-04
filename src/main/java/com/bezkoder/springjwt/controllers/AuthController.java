@@ -120,6 +120,20 @@ public class AuthController {
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
+	@PostMapping("/edit")
+	public ResponseEntity<?> editUser(@Valid @RequestBody SignupRequest signUpRequest) {
+		// Create new user's account
+		User user = new User();
+		user.setId(signUpRequest.getId());
+		user.setUsername(signUpRequest.getUsername());
+		user.setEmail(signUpRequest.getEmail());
+		user.setPassword(encoder.encode(signUpRequest.getPassword()));
+		user.setCelular(signUpRequest.getCelular());
+		user.setNombre(signUpRequest.getNombre());
+		userRepository.save(user);
+
+		return ResponseEntity.ok(new MessageResponse("Ha cambiado la informacion de su usuario"));
+	}
 	@GetMapping("/getUsers")
 	public ResponseEntity<?> getUsers(){
 		

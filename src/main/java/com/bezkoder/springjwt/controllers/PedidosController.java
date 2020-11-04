@@ -100,6 +100,19 @@ public class PedidosController {
 		pedidosRepository.deleteById(celular);
 		return ResponseEntity.ok("Eliminado");
 	}
+	@GetMapping("/deleteAll")
+	public ResponseEntity<?> DeleteAll(){
+		
+		List<Pedidos> pd=pedidosRepository.findAll();
+		for (Pedidos pedidos:pd) {
+			List<DetallePedido> productos=pedidos.getProductos();
+			for (DetallePedido detalle:productos) {
+				detallepedidosRepository.deleteById(detalle.getId());
+			}
+			pedidosRepository.deleteById(pedidos.getId());
+		}
+		return ResponseEntity.ok("Eliminado");
+	}
 	@PostMapping("/savePedido")
 	public ResponseEntity<?> savePedido(@Valid @RequestBody SavePedidoRequest product){
 		try {
