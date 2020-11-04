@@ -38,7 +38,7 @@ public class ContactoController {
 		MimeMessageHelper helper = new MimeMessageHelper(msg, true);
 		helper.setTo("desarrollo2@lacortedelosbuhos.com");
 		helper.setFrom(Remitente);
-		Path path=Paths.get("/app/src/index.html");
+		Path path=Paths.get("/app/src/main/resources/index.html");
 		File directoryPath = new File("/app/src/main/resources");
 	      //List of all files and directories
 	      String contents[] = directoryPath.list();
