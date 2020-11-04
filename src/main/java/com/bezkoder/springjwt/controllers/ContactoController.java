@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileUrlResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -36,7 +37,7 @@ public class ContactoController {
 		MimeMessageHelper helper = new MimeMessageHelper(msg, true);
 		helper.setTo("desarrollo2@lacortedelosbuhos.com");
 		helper.setFrom(Remitente);
-		ClassPathResource path2=new ClassPathResource("/index.html");
+		FileUrlResource path2=new FileUrlResource("/index.html");
 		byte[] encoded = Files.readAllBytes(path2.getFile().toPath());
 		String body = new String(encoded, StandardCharsets.UTF_8);
 		System.out.println(request.getCorreo());

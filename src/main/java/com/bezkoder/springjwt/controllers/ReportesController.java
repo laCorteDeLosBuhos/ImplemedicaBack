@@ -37,8 +37,12 @@ public class ReportesController {
 			List<Pedidos> pedidos=ciudadRepository.findbyyear(i+1, ano);
 			for (Pedidos detalle:pedidos) {
 				for (DetallePedido detalles:detalle.getProductos()) {
-					if(detalles.getProducto().getLinea().startsWith(linea)) {
-						cantidad=cantidad+detalles.getCantidad();
+					if(linea.equals("Todos")) {
+							cantidad=cantidad+detalles.getCantidad();
+					}else {
+						if(detalles.getProducto().getLinea().startsWith(linea)) {
+							cantidad=cantidad+detalles.getCantidad();
+						}	
 					}
 				}	
 			}
