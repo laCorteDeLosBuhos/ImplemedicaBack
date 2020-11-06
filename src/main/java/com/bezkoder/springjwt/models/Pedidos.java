@@ -32,6 +32,13 @@ public class Pedidos {
 	private Ciudad ciudad;
 	private String observaciones;
 	private String dedica;
+	private String persona;
+	public String getPersona() {
+		return persona;
+	}
+	public void setPersona(String persona) {
+		this.persona = persona;
+	}
 	private String estado;
 	@ManyToMany
 	@JoinColumn(name = "id_detalle")

@@ -61,6 +61,7 @@ public class PedidosController {
 			ped.setCiudad(cd);
 			ped.setObservaciones(product.getObservaciones());
 			ped.setDedica(product.getDedica());
+			ped.setPersona(product.getPersona());
 			ped.setEstado("Pendiente");
 			List<DetallePedido> productos= product.getProductos();
 			List<DetallePedido> products = new ArrayList<DetallePedido>();

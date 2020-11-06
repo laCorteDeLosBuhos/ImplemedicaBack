@@ -27,8 +27,16 @@ public class PedidosRequest {
 	private Ciudad ciudad;
 	@NotNull
 	private String observaciones;
-	@NotNull
+	
 	private String dedica;
+	
+	private String persona;
+	public String getPersona() {
+		return persona;
+	}
+	public void setPersona(String persona) {
+		this.persona = persona;
+	}
 	@NotNull
 	private List<DetallePedido> productos;
 	public String getNombre() {
