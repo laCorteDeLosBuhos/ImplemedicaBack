@@ -36,7 +36,8 @@ public class ContactoController {
 		try {
 		System.out.println(request.getComentario());
 		MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-		helper.setTo("m.maldonado@lacortedelosbuhos.com");
+		helper.setTo("implemedica.virtual@gmail.com");
+		helper.setCc("ventas@implemedica.com.co");
 		helper.setFrom("implemedica.virtual@gmail.com");
 		Path path=Paths.get("/app/src/main/resources/index.html");
 		byte[] encoded = Files.readAllBytes(path);
